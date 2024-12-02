@@ -8,7 +8,7 @@
  * Author: Benqi (wubenqi@gmail.com)
  */
 
-package session2
+package session
 
 import (
 	"github.com/teamgram/proto/v2/iface"

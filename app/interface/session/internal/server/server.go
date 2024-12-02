@@ -21,19 +21,19 @@ package server
 import (
 	"flag"
 
+	"github.com/teamgram/proto/v2/rpc/codec"
 	"github.com/teamgram/teamgram-server/v2/app/interface/session/internal/config"
-	"github.com/teamgram/teamgram-server/v2/app/interface/session/internal/server/grpc"
+	"github.com/teamgram/teamgram-server/v2/app/interface/session/internal/server/tg/service"
 	"github.com/teamgram/teamgram-server/v2/app/interface/session/internal/svc"
+	"github.com/teamgram/teamgram-server/v2/app/interface/session/session/sessionservice"
 
-	"github.com/zeromicro/go-zero/core/conf"
-	"github.com/zeromicro/go-zero/core/logx"
-	"github.com/zeromicro/go-zero/zrpc"
+	"github.com/cloudwego/kitex/server"
 )
 
 var configFile = flag.String("f", "etc/session.yaml", "the config file")
 
 type Server struct {
-	grpcSrv *zrpc.RpcServer
+	server.Server
 }
 
 func New() *Server {
@@ -42,21 +42,21 @@ func New() *Server {
 
 func (s *Server) Initialize() error {
 	var c config.Config
-	conf.MustLoad(*configFile, &c)
-
-	logx.Infov(c)
 	ctx := svc.NewServiceContext(c)
-	s.grpcSrv = grpc.New(ctx, c.RpcServerConf)
+	_ = ctx
 
-	go func() {
-		go s.grpcSrv.Start()
-	}()
+	cCodec := codec.NewZRpcCodec(true)
+	s.Server = sessionservice.NewServer(service.New(ctx), server.WithCodec(cCodec))
 	return nil
 }
 
 func (s *Server) RunLoop() {
+	if err := s.Server.Run(); err != nil {
+		// log.Println("server stopped with error:", err)
+	} else {
+		// log.Println("server stopped")
+	}
 }
 
 func (s *Server) Destroy() {
-	s.grpcSrv.Stop()
 }

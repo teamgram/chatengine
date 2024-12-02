@@ -8,7 +8,7 @@
  * Author: Benqi (wubenqi@gmail.com)
  */
 
-package session2
+package session
 
 import (
 	"context"
@@ -20,11 +20,10 @@ import (
 	"github.com/teamgram/proto/v2/tg"
 )
 
-var (
-	_ context.Context
-	_ iface.TLObject
-	_ *tg.Bool
-)
+var _ iface.TLObject
+var _ fmt.Stringer
+var _ *tg.Bool
+var _ bin.Fields
 
 // TLSessionQueryAuthKey <--
 type TLSessionQueryAuthKey struct {
@@ -513,5 +512,17 @@ func (m *TLSessionPushRpcResultData) Decode(d *bin.Decoder) (err error) {
 // ----------------------------------------------------------------------------
 // VectorResList <--
 
-//--------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // rpc
+
+type RPCSession interface {
+	SessionQueryAuthKey(ctx context.Context, in *TLSessionQueryAuthKey) (*tg.AuthKeyInfo, error)
+	SessionSetAuthKey(ctx context.Context, in *TLSessionSetAuthKey) (*tg.Bool, error)
+	SessionCreateSession(ctx context.Context, in *TLSessionCreateSession) (*tg.Bool, error)
+	SessionSendDataToSession(ctx context.Context, in *TLSessionSendDataToSession) (*tg.Bool, error)
+	SessionSendHttpDataToSession(ctx context.Context, in *TLSessionSendHttpDataToSession) (*HttpSessionData, error)
+	SessionCloseSession(ctx context.Context, in *TLSessionCloseSession) (*tg.Bool, error)
+	SessionPushUpdatesData(ctx context.Context, in *TLSessionPushUpdatesData) (*tg.Bool, error)
+	SessionPushSessionUpdatesData(ctx context.Context, in *TLSessionPushSessionUpdatesData) (*tg.Bool, error)
+	SessionPushRpcResultData(ctx context.Context, in *TLSessionPushRpcResultData) (*tg.Bool, error)
+}

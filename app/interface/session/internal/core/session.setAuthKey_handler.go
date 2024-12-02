@@ -19,15 +19,19 @@
 package core
 
 import (
-	"github.com/teamgram/proto/mtproto"
+	"errors"
+
+	"github.com/teamgram/proto/v2/tg"
 	"github.com/teamgram/teamgram-server/v2/app/interface/session/session"
 )
 
+var _ *tg.Bool
+
 // SessionSetAuthKey
 // session.setAuthKey auth_key:AuthKeyInfo future_salt:FutureSalt expires_in:int = Bool;
-func (c *SessionCore) SessionSetAuthKey(in *session.TLSessionSetAuthKey) (*mtproto.Bool, error) {
+func (c *SessionCore) SessionSetAuthKey(in *session.TLSessionSetAuthKey) (*tg.Bool, error) {
 	// TODO: not impl
-	c.Logger.Errorf("session.setAuthKey blocked, License key from https://teamgram.net required to unlock enterprise features.")
+	// c.Logger.Errorf("session.setAuthKey blocked, License key from https://teamgram.net required to unlock enterprise features.")
 
-	return nil, mtproto.ErrEnterpriseIsBlocked
+	return nil, errors.New("session.setAuthKey not implemented")
 }

@@ -8,7 +8,7 @@
  * Author: Benqi (wubenqi@gmail.com)
  */
 
-package session2
+package session
 
 import (
 	"fmt"
@@ -18,10 +18,10 @@ import (
 	"github.com/teamgram/proto/v2/tg"
 )
 
-var (
-	_ iface.TLObject
-	_ *tg.Bool
-)
+var _ iface.TLObject
+var _ fmt.Stringer
+var _ *tg.Bool
+var _ bin.Fields
 
 // HttpSessionDataClazz <--
 //   - TL_HttpSessionData

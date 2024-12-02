@@ -19,15 +19,19 @@
 package core
 
 import (
-	"github.com/teamgram/proto/mtproto"
+	"errors"
+
+	"github.com/teamgram/proto/v2/tg"
 	"github.com/teamgram/teamgram-server/v2/app/interface/session/session"
 )
 
+var _ *tg.Bool
+
 // SessionPushRpcResultData
 // session.pushRpcResultData perm_auth_key_id:long auth_key_id:long session_id:long client_req_msg_id:long rpc_result_data:bytes = Bool;
-func (c *SessionCore) SessionPushRpcResultData(in *session.TLSessionPushRpcResultData) (*mtproto.Bool, error) {
+func (c *SessionCore) SessionPushRpcResultData(in *session.TLSessionPushRpcResultData) (*tg.Bool, error) {
 	// TODO: not impl
-	c.Logger.Errorf("session.pushRpcResultData blocked, License key from https://teamgram.net required to unlock enterprise features.")
+	// c.Logger.Errorf("session.pushRpcResultData blocked, License key from https://teamgram.net required to unlock enterprise features.")
 
-	return nil, mtproto.ErrEnterpriseIsBlocked
+	return nil, errors.New("session.pushRpcResultData not implemented")
 }

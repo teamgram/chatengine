@@ -19,15 +19,19 @@
 package core
 
 import (
-	"github.com/teamgram/proto/mtproto"
+	"errors"
+
+	"github.com/teamgram/proto/v2/tg"
 	"github.com/teamgram/teamgram-server/v2/app/interface/session/session"
 )
 
+var _ *tg.Bool
+
 // SessionPushUpdatesData
 // session.pushUpdatesData flags:# perm_auth_key_id:long notification:flags.0?true updates:Updates = Bool;
-func (c *SessionCore) SessionPushUpdatesData(in *session.TLSessionPushUpdatesData) (*mtproto.Bool, error) {
+func (c *SessionCore) SessionPushUpdatesData(in *session.TLSessionPushUpdatesData) (*tg.Bool, error) {
 	// TODO: not impl
-	c.Logger.Errorf("session.pushUpdatesData blocked, License key from https://teamgram.net required to unlock enterprise features.")
+	// c.Logger.Errorf("session.pushUpdatesData blocked, License key from https://teamgram.net required to unlock enterprise features.")
 
-	return nil, mtproto.ErrEnterpriseIsBlocked
+	return nil, errors.New("session.pushUpdatesData not implemented")
 }

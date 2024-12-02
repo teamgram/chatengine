@@ -8,7 +8,7 @@
  * Author: Benqi (wubenqi@gmail.com)
  */
 
-package session2
+package session
 
 const (
 	ClazzID_sessionClientEvent             = 0xf17f375f // f17f375f

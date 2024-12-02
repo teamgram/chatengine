@@ -19,15 +19,19 @@
 package core
 
 import (
-	"github.com/teamgram/proto/mtproto"
+	"errors"
+
+	"github.com/teamgram/proto/v2/tg"
 	"github.com/teamgram/teamgram-server/v2/app/interface/session/session"
 )
+
+var _ *tg.Bool
 
 // SessionSendHttpDataToSession
 // session.sendHttpDataToSession client:SessionClientData = HttpSessionData;
 func (c *SessionCore) SessionSendHttpDataToSession(in *session.TLSessionSendHttpDataToSession) (*session.HttpSessionData, error) {
 	// TODO: not impl
-	c.Logger.Errorf("session.sendHttpDataToSession blocked, License key from https://teamgram.net required to unlock enterprise features.")
+	// c.Logger.Errorf("session.sendHttpDataToSession blocked, License key from https://teamgram.net required to unlock enterprise features.")
 
-	return nil, mtproto.ErrEnterpriseIsBlocked
+	return nil, errors.New("session.sendHttpDataToSession not implemented")
 }

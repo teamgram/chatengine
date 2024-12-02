@@ -19,15 +19,19 @@
 package core
 
 import (
-	"github.com/teamgram/proto/mtproto"
+	"errors"
+
+	"github.com/teamgram/proto/v2/tg"
 	"github.com/teamgram/teamgram-server/v2/app/interface/session/session"
 )
 
+var _ *tg.Bool
+
 // SessionCreateSession
 // session.createSession client:SessionClientEvent = Bool;
-func (c *SessionCore) SessionCreateSession(in *session.TLSessionCreateSession) (*mtproto.Bool, error) {
+func (c *SessionCore) SessionCreateSession(in *session.TLSessionCreateSession) (*tg.Bool, error) {
 	// TODO: not impl
-	c.Logger.Errorf("session.createSession blocked, License key from https://teamgram.net required to unlock enterprise features.")
+	// c.Logger.Errorf("session.createSession blocked, License key from https://teamgram.net required to unlock enterprise features.")
 
-	return nil, mtproto.ErrEnterpriseIsBlocked
+	return nil, errors.New("session.createSession not implemented")
 }

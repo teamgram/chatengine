@@ -19,15 +19,19 @@
 package core
 
 import (
-	"github.com/teamgram/proto/mtproto"
+	"errors"
+
+	"github.com/teamgram/proto/v2/tg"
 	"github.com/teamgram/teamgram-server/v2/app/interface/session/session"
 )
 
+var _ *tg.Bool
+
 // SessionCloseSession
 // session.closeSession client:SessionClientEvent = Bool;
-func (c *SessionCore) SessionCloseSession(in *session.TLSessionCloseSession) (*mtproto.Bool, error) {
+func (c *SessionCore) SessionCloseSession(in *session.TLSessionCloseSession) (*tg.Bool, error) {
 	// TODO: not impl
-	c.Logger.Errorf("session.closeSession blocked, License key from https://teamgram.net required to unlock enterprise features.")
+	// c.Logger.Errorf("session.closeSession blocked, License key from https://teamgram.net required to unlock enterprise features.")
 
-	return nil, mtproto.ErrEnterpriseIsBlocked
+	return nil, errors.New("session.closeSession not implemented")
 }
